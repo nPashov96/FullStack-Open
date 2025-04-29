@@ -27,6 +27,8 @@ const App = () => {
     setInitialVotes(copyVotes);
   };
 
+  
+
   return (
     <div>
       <h1>Anecdote of the day</h1>
