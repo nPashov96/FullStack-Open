@@ -17,9 +17,14 @@ const updatePerson = (id, newObject) => {
     return axios.put(`http://localhost:3001/persons/${id}`, newObject)
 }
 
+const getPerson = (id) => {
+    return axios.get(`${baseUrl}/${id}`);
+};
+
 export default {
     getAll,
     addNew,
     deletePerson,
-    updatePerson
+    updatePerson,
+    getPerson
 }
