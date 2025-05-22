@@ -48,7 +48,7 @@ function App() {
       ) : (
         <ul>
           {countries.map((country, index) => (
-            <div key={country.cca3} className="result">
+            <div key={country.cca3}>
               <li>{country.name.common}</li>
               <button onClick={() => showInfo(country.cca3)}>
                 {show[country.cca3] ? "hide" : "show"}
