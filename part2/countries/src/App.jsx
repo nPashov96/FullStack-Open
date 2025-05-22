@@ -5,6 +5,7 @@ import "./index.css";
 function App() {
   const [countries, setCountries] = useState([]);
   const [searchItem, setSearchItem] = useState("");
+  const [show, setShow] = useState({});
 
   useEffect(() => {
     if (searchItem.trim() === "") {
@@ -23,6 +24,13 @@ function App() {
     fetchCountry();
   }, [searchItem]);
 
+  const showInfo = (countryCode) => {
+    setShow((prevState) => ({
+      ...prevState,
+      [countryCode]: !prevState[countryCode],
+    }));
+  };
+
   return (
     <div>
       <h1>Country Info App</h1>
@@ -39,8 +47,31 @@ function App() {
         <p>Too many countries, please be more specific!</p>
       ) : (
         <ul>
-          {countries.map((country) => (
-            <li key={country.cca3}>{country.name.common}</li>
+          {countries.map((country, index) => (
+            <div key={country.cca3} className="result">
+              <li>{country.name.common}</li>
+              <button onClick={() => showInfo(country.cca3)}>
+                {show[country.cca3] ? "hide" : "show"}
+              </button>
+              {show[country.cca3] && (
+                <div>
+                  <h1>{countries[index].name.common}</h1>
+                  <p>Capital: {countries[index].capital}</p>
+                  <p>Area: {countries[index].area}</p>
+                  <h2>Languages</h2>
+                  <ul>
+                    {Object.keys(countries[index].languages).map((key) => (
+                      <li key={key}>{countries[index].languages[key]}</li>
+                    ))}
+                  </ul>
+                  <img
+                    src={countries[index].flags.svg}
+                    alt="flag"
+                    className="country-flag"
+                  />
+                </div>
+              )}
+            </div>
           ))}
         </ul>
       )}

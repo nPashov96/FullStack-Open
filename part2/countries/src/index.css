@@ -1,4 +1,8 @@
 .country-flag {
-  width: 130px;
-  height: 160px;
+  width: 300px;
+  height: 250px;
+}
+
+.result {
+  display: flex;
 }
